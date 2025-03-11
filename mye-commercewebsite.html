@@ -1,0 +1,101 @@
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import Vendors from "./pages/Vendors";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import AdminPanel from "./pages/AdminPanel";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import "./styles/theme.css";
+
+function App() {
+  return (
+    <Router>
+      <Navbar />
+      <div className="container mx-auto p-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/vendors" element={<Vendors />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/admin" element={<AdminPanel />} />
+        </Routes>
+      </div>
+      <Footer />
+    </Router>
+  );
+}
+
+export default App;
+
+// Navbar Component (./components/Navbar.js)
+import React from "react";
+import { Link } from "react-router-dom";
+
+const Navbar = () => {
+  return (
+    <nav className="bg-blue-600 p-4 shadow-lg">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link to="/" className="text-white text-2xl font-bold">Rhema4live online store</Link>
+        <div className="space-x-4">
+          <Link to="/products" className="text-white hover:underline">Products</Link>
+          <Link to="/vendors" className="text-white hover:underline">Vendors</Link>
+          <Link to="/cart" className="text-white hover:underline">Cart</Link>
+          <Link to="/admin" className="text-white hover:underline">Admin</Link>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+
+// Footer Component (./components/Footer.js)
+const Footer = () => {
+  return (
+    <footer className="bg-gray-800 text-white text-center p-4 mt-10">
+      <p>© 2025 ShopX. All rights reserved.</p>
+      <div className="flex justify-center space-x-4 mt-2">
+        <a href="#" className="hover:underline">Privacy Policy</a>
+        <a href="#" className="hover:underline">Terms of Service</a>
+        <a href="#" className="hover:underline">Contact Us</a>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+
+// Home Component (./pages/Home.js)
+const Home = () => {
+  return (
+    <div className="relative text-center">
+      <img src="/assets/hero.jpg" alt="Shop Banner" className="w-full h-[400px] object-cover" />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+        <h1 className="text-4xl font-bold">Welcome to Rhema4live online store</h1>
+        <p className="text-lg">Your ultimate multi-vendor marketplace</p>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+
+// ProductCard Component (./components/ProductCard.js)
+const ProductCard = ({ product }) => {
+  return (
+    <div className="bg-white shadow-lg rounded-lg p-4">
+      <img src={product.image} alt={product.name} className="w-full h-40 object-cover rounded" />
+      <h2 className="text-lg font-bold mt-2">{product.name}</h2>
+      <p className="text-gray-500">${product.price}</p>
+      <button className="bg-blue-500 text-white px-4 py-2 mt-2 rounded hover:bg-blue-700">
+        Add to Cart
+      </button>
+    </div>
+  );
+};
+
+export default ProductCard;
